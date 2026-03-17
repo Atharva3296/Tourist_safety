@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency - Tourist Safety</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <h2>Tourist Safety System</h2>
+        </div>
+        <div class="nav-left">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#location" class="nav-link">Location</a>
+            <a href="index.html#emergency" class="nav-link active">Emergency</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main class="dashboard-main content-box">
+    <h1>Emergency Alert</h1>
+    <p>In case of danger or urgent assistance, use the options below. Your location will be shared with emergency responders automatically.</p>
+
+    <section class="emergency-buttons">
+        <button class="alert-btn" onclick="sendEmergency('police')">Call Police</button>
+        <button class="alert-btn" onclick="sendEmergency('ambulance')">Call Ambulance</button>
+        <button class="alert-btn" onclick="sendEmergency('fire')">Call Fire Services</button>
+        <button class="alert-btn" onclick="sendEmergency('alert')">Send General Alert</button>
+    </section>
+
+    <section class="emergency-instructions">
+        <h2>Instructions:</h2>
+        <ul>
+            <li>Stay calm and provide your exact location.</li>
+            <li>If possible, move to a safe location before sending alerts.</li>
+            <li>Keep your phone charged and accessible at all times.</li>
+            <li>Use multiple alert options if needed.</li>
+        </ul>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

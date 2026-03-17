@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <h2>Tourist Safety System</h2>
+        </div>
+        <div class="nav-left">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#location" class="nav-link active">Location</a>
+            <a href="index.html#emergency" class="nav-link">Emergency</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main class="dashboard-main content-box">
+    <h1>Location Monitoring</h1>
+    <p>Your location is tracked to ensure your safety during travels. Make sure location services are enabled on your device.</p>
+
+    <section class="location-card">
+        <h2>Your Location</h2>
+        <div id="location-display" class="location-info">
+            <p>Click the button below to share your location</p>
+        </div>
+        <button class="btn btn-primary" onclick="shareLocation()">Share My Location</button>
+    </section>
+
+    <section class="alert-box">
+        <h2>Emergency Assistance</h2>
+        <p>If you are in danger or need immediate help, click below:</p>
+        <button class="alert-btn" onclick="callEmergency()">Call Emergency Services</button>
+    </section>
+
+    <section class="safety-tips">
+        <h2>Safety Tips</h2>
+        <div class="safety-tips">
+            <p>✓ Share your travel plan with friends or family.</p>
+            <p>✓ Avoid isolated areas if traveling alone.</p>
+            <p>✓ Keep your phone charged at all times.</p>
+            <p>✓ Enable real-time location sharing for emergency assistance.</p>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

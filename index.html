@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Safety Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Tourist Safety System</h1>
+                    <p>Secure Travel Monitoring</p>
+                </div>
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#" id="go-to-register">Create one</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Join our safety network</p>
+                </div>
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" name="name" placeholder="Enter your full name" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <input type="email" id="register-email" name="email" placeholder="Enter your email" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Phone Number</label>
+                        <input type="tel" id="register-phone" name="phone" placeholder="Enter your phone number" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" placeholder="Enter a strong password" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Confirm Password</label>
+                        <input type="password" id="register-confirm" name="confirm" placeholder="Confirm your password" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" id="go-to-login">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <!-- Navigation Header -->
+        <header class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h2>Tourist Safety System</h2>
+                </div>
+                <nav class="navbar-menu">
+                    <a href="#" class="nav-link active" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="location">Location</a>
+                    <a href="#" class="nav-link" data-page="emergency">Emergency</a>
+                    <a href="#" class="nav-link" data-page="sos">SOS</a>
+                    <a href="#" class="nav-link" data-page="friends">Friends</a>
+                    <a href="#" class="nav-link" data-page="safety-map">Map</a>
+                    <a href="#" class="nav-link" data-page="checklist">Checklist</a>
+                    <a href="#" class="nav-link" data-page="incidents">Incidents</a>
+                    <a href="#" class="nav-link" data-page="documents">Docs</a>
+                    <a href="#" class="nav-link" data-page="profile">Profile</a>
+                    <a href="#" class="nav-link" data-page="contact">Contact</a>
+                </nav>
+                <div class="navbar-user">
+                    <button id="theme-toggle" class="btn btn-secondary btn-sm">Dark Mode</button>
+                    <span id="user-name">User</span>
+                    <button id="logout-btn" class="btn btn-secondary btn-sm">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Home Page -->
+            <section id="home-page" class="dashboard-section active">
+                <div class="hero-section">
+                    <h1>Welcome to Tourist Safety Monitoring System</h1>
+                    <p>Your trusted companion for safe and secure travel</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📍</div>
+                        <h3>Real-time Location</h3>
+                        <p>Track your location and share with trusted contacts</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🆘</div>
+                        <h3>Emergency Alert</h3>
+                        <p>Send instant emergency alerts to authorities</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Contact Management</h3>
+                        <p>Manage emergency contacts easily</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Safety Tips</h3>
+                        <p>Get location-based safety recommendations</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-btn" id="share-location-btn">
+                            <span class="action-icon">📍</span>
+                            <span>Share Location</span>
+                        </button>
+                        <button class="action-btn" id="emergency-btn">
+                            <span class="action-icon">🆘</span>
+                            <span>Emergency Alert</span>
+                        </button>
+                        <button class="action-btn" id="find-safe-btn">
+                            <span class="action-icon">🏥</span>
+                            <span>Find Safe Place</span>
+                        </button>
+                        <button class="action-btn" id="contact-support-btn">
+                            <span class="action-icon">📞</span>
+                            <span>Contact Support</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location Page -->
+            <section id="location-page" class="dashboard-section">
+                <h1>Location Monitoring</h1>
+                <div class="location-content">
+                    <div class="location-card">
+                        <h3>Current Location</h3>
+                        <div id="location-display" class="location-info">
+                            <p>Click the button to share your location</p>
+                        </div>
+                        <button id="get-location-btn" class="btn btn-primary">Share My Location</button>
+                    </div>
+
+                    <div class="location-card">
+                        <h3>Safe Areas Nearby</h3>
+                        <ul id="safe-areas-list" class="safe-areas">
+                            <li>Police Station - 2.5 km away</li>
+                            <li>Hospital - 1.8 km away</li>
+                            <li>Tourist Information Center - 0.5 km away</li>
+                            <li>Hotel - 1.2 km away</li>
+                        </ul>
+                    </div>
+
+                    <div class="location-card">
+                        <h3>Safety Tips for Your Location</h3>
+                        <div class="safety-tips">
+                            <p>✓ Stay in well-lit areas during night</p>
+                            <p>✓ Keep your valuables secure</p>
+                            <p>✓ Inform someone about your whereabouts</p>
+                            <p>✓ Trust your instincts</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Page -->
+            <section id="emergency-page" class="dashboard-section">
+                <h1>Emergency Alert System</h1>
+                <div class="emergency-content">
+                    <div class="alert-box">
+                        <h2>Send Emergency Alert</h2>
+                        <p>Choose the type of emergency you're facing:</p>
+                        <div class="emergency-types">
+                            <button class="emergency-btn danger" data-type="medical">
+                                <span class="btn-icon">🏥</span>
+                                <span>Medical Emergency</span>
+                            </button>
+                            <button class="emergency-btn danger" data-type="theft">
+                                <span class="btn-icon">👮</span>
+                                <span>Theft/Crime</span>
+                            </button>
+                            <button class="emergency-btn danger" data-type="accident">
+                                <span class="btn-icon">🚗</span>
+                                <span>Accident</span>
+                            </button>
+                            <button class="emergency-btn danger" data-type="lost">
+                                <span class="btn-icon">🗺️</span>
+                                <span>Lost/Help Needed</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="emergency-info">
+                        <h3>Important Numbers</h3>
+                        <div class="emergency-numbers">
+                            <div class="number-item">
+                                <strong>Police:</strong>
+                                <a href="tel:100">100</a>
+                            </div>
+                            <div class="number-item">
+                                <strong>Ambulance:</strong>
+                                <a href="tel:102">102</a>
+                            </div>
+                            <div class="number-item">
+                                <strong>Fire:</strong>
+                                <a href="tel:101">101</a>
+                            </div>
+                            <div class="number-item">
+                                <strong>Tourist Helpline:</strong>
+                                <a href="tel:1363">1363</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOS Panic Button -->
+            <section id="sos-page" class="dashboard-section">
+                <h1>Emergency SOS Alert</h1>
+                <div class="sos-container">
+                    <div class="sos-header">
+                        <p>Press the button below to send an immediate emergency alert to your contacts</p>
+                    </div>
+                    <button id="sos-button" class="sos-button">SOS</button>
+                    <div class="sos-info">
+                        <p>When activated, the system will:</p>
+                        <ul>
+                            <li>Alert all your emergency contacts</li>
+                            <li>Share your current location</li>
+                            <li>Record audio for evidence</li>
+                            <li>Contact nearby authorities</li>
+                        </ul>
+                    </div>
+                    <div id="sos-status" class="sos-status"></div>
+                </div>
+            </section>
+
+            <!-- Friends Location Tracking -->
+            <section id="friends-page" class="dashboard-section">
+                <h1>Friends Location Tracking</h1>
+                <div class="friends-container">
+                    <div class="friends-add">
+                        <h3>Add Friend</h3>
+                        <div class="form-group">
+                            <input type="email" id="friend-email" placeholder="Friend's email">
+                            <button class="btn btn-primary" id="add-friend-btn">Add Friend</button>
+                        </div>
+                    </div>
+                    <div class="friends-list">
+                        <h3>Your Friends</h3>
+                        <div id="friends-display" class="friends-display">
+                            <p>No friends added yet</p>
+                        </div>
+                    </div>
+                    <div class="sharing-status">
+                        <h3>Location Sharing</h3>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="share-location-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <p id="sharing-status-text">Location sharing is OFF</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Safety Map -->
+            <section id="safety-map-page" class="dashboard-section">
+                <h1>Community Safety Map</h1>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <p>Interactive safety map view</p>
+                        <canvas id="safety-canvas" width="800" height="400"></canvas>
+                    </div>
+                    <div class="map-stats">
+                        <h3>Safety Rating</h3>
+                        <div class="rating-grid">
+                            <div class="rating-item">
+                                <span class="rating-label">Safe Areas</span>
+                                <span class="rating-value" id="safe-count">45</span>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">Caution Areas</span>
+                                <span class="rating-value" id="caution-count">12</span>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">Unsafe Areas</span>
+                                <span class="rating-value" id="unsafe-count">3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Travel Checklist -->
+            <section id="checklist-page" class="dashboard-section">
+                <h1>Travel Safety Checklist</h1>
+                <div class="checklist-container">
+                    <div class="checklist-section">
+                        <h3>Before Travel</h3>
+                        <div id="before-checklist" class="checklist-items"></div>
+                    </div>
+                    <div class="checklist-section">
+                        <h3>During Travel</h3>
+                        <div id="during-checklist" class="checklist-items"></div>
+                    </div>
+                    <div class="checklist-section">
+                        <h3>Documents & Money</h3>
+                        <div id="docs-checklist" class="checklist-items"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Incident Reporting -->
+            <section id="incidents-page" class="dashboard-section">
+                <h1>Report Incident</h1>
+                <div class="incident-container">
+                    <form id="incident-form" class="incident-form">
+                        <div class="form-group">
+                            <label for="incident-type">Type of Incident</label>
+                            <select id="incident-type" required>
+                                <option value="">Select Type...</option>
+                                <option value="theft">Theft/Robbery</option>
+                                <option value="scam">Scam/Fraud</option>
+                                <option value="harassment">Harassment</option>
+                                <option value="assault">Assault</option>
+                                <option value="accident">Accident</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-location">Location</label>
+                            <input type="text" id="incident-location" placeholder="Where did it happen?" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-description">Description</label>
+                            <textarea id="incident-description" placeholder="Describe the incident..." rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="incident-photo">Add Photo</label>
+                            <input type="file" id="incident-photo" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Report Incident</button>
+                    </form>
+                    <div id="incidents-list" class="incidents-list"></div>
+                </div>
+            </section>
+
+            <!-- Document Vault -->
+            <section id="documents-page" class="dashboard-section">
+                <h1>Secure Document Vault</h1>
+                <div class="documents-container">
+                    <div class="add-document">
+                        <h3>Add Document</h3>
+                        <div class="form-group">
+                            <label for="doc-type">Document Type</label>
+                            <select id="doc-type">
+                                <option value="">Select Type...</option>
+                                <option value="passport">Passport</option>
+                                <option value="visa">Visa</option>
+                                <option value="insurance">Insurance</option>
+                                <option value="ticket">Ticket</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-content">Document Details</label>
+                            <textarea id="doc-content" placeholder="Enter document details (encrypted)..." rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="add-doc-btn">Save Document</button>
+                    </div>
+                    <div class="documents-list">
+                        <h3>Your Documents</h3>
+                        <div id="docs-display" class="docs-display"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Profile -->
+            <section id="profile-page" class="dashboard-section">
+                <h1>My Profile</h1>
+                <div class="profile-container">
+                    <div class="profile-section">
+                        <h3>Account Information</h3>
+                        <div class="profile-info">
+                            <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                            <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                            <p><strong>Phone:</strong> <span id="profile-phone"></span></p>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Emergency Contacts</h3>
+                        <div class="form-group">
+                            <input type="email" id="emergency-contact" placeholder="Add emergency contact email">
+                            <button class="btn btn-primary" id="add-emergency-btn">Add Contact</button>
+                        </div>
+                        <div id="emergency-contacts-list" class="contacts-list"></div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Preferences</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="notifications-pref" checked>
+                            <span>Enable Notifications</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="location-pref" checked>
+                            <span>Allow Location Access</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="contact-page" class="dashboard-section">
+                <h1>Contact & Support</h1>
+                <div class="contact-content">
+                    <div class="contact-card">
+                        <h3>Get in Touch</h3>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" name="message" placeholder="Describe your concern..." rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Contact Information</h3>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> support@touristsafety.com</p>
+                            <p><strong>Phone:</strong> +91-XXXX-XXXX-XXXX</p>
+                            <p><strong>Address:</strong> Tourist Safety Center, City</p>
+                            <p><strong>Hours:</strong> 24/7 Available</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Our Team</h3>
+                        <div class="team-info">
+                            <p>Our dedicated team is always ready to help tourists ensure their safety and make their travel experience memorable.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Success/Error Messages -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="modal-title">Message</h2>
+            <p id="modal-message"></p>
+            <button class="btn btn-primary" id="modal-btn">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Tourist Safety Support</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <h2>Tourist Safety System</h2>
+        </div>
+        <div class="nav-left">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#location" class="nav-link">Location</a>
+            <a href="index.html#emergency" class="nav-link">Emergency</a>
+            <a href="index.html#contact" class="nav-link active">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</nav>
+
+<main class="dashboard-main content-box">
+    <h1>Emergency & Tourist Support</h1>
+    <p>For any assistance during your travels, you can reach out to the following contacts:</p>
+
+    <section class="contact-info">
+        <h2>Contact Information</h2>
+        <p><strong>Police:</strong> 112 (24/7)</p>
+        <p><strong>Tourist Helpline:</strong> 1363 (Available 8am - 10pm)</p>
+        <p><strong>Medical Emergency:</strong> 108</p>
+        <p><strong>Fire Department:</strong> 101</p>
+        <p><strong>Email Support:</strong> <a href="mailto:support@touristsafety.com">support@touristsafety.com</a></p>
+        <p><strong>Website:</strong> <a href="https://www.touristsafety.com" target="_blank">www.touristsafety.com</a></p>
+    </section>
+
+    <section class="contact-card">
+        <h2>Send Us a Message</h2>
+        <p>If you have questions or need non-urgent assistance, fill out the form below:</p>
+        <form id="contact-form" class="contact-form" onsubmit="sendMessage(event)">
+            <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" placeholder="Type your message here" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
