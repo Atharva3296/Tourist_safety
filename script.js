@@ -254,6 +254,13 @@ class UIManager {
         this.setupEventListeners();
         this.initDarkMode();
         this.checkAuthState();
+        this.requestNotificationPermission();
+    }
+
+    requestNotificationPermission() {
+        if ("Notification" in window) {
+            Notification.requestPermission();
+        }
     }
 
     initDarkMode() {
@@ -272,66 +279,86 @@ class UIManager {
 
     setupEventListeners() {
         // Auth Navigation
-        document.getElementById('go-to-register').addEventListener('click', (e) => {
-            e.preventDefault();
-            this.showRegisterPage();
-        });
-
-        document.getElementById('go-to-login').addEventListener('click', (e) => {
-            e.preventDefault();
-            this.showLoginPage();
-        });
-
-        // Forms
-        document.getElementById('login-form').addEventListener('submit', (e) => this.handleLogin(e));
-        document.getElementById('register-form').addEventListener('submit', (e) => this.handleRegister(e));
-        document.getElementById('contact-form').addEventListener('submit', (e) => this.handleContact(e));
-        
-        // Support tabs
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => this.handleTabSwitch(e));
-        });
-        
-        // Live chat
-        const sendChatBtn = document.getElementById('send-chat-btn');
-        if (sendChatBtn) {
-            sendChatBtn.addEventListener('click', () => this.handleChatMessage());
-        }
-        
-        const chatInput = document.getElementById('chat-input');
-        if (chatInput) {
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') this.handleChatMessage();
+        const goToRegister = document.getElementById('go-to-register');
+        if (goToRegister) {
+            goToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showRegisterPage();
             });
         }
-        
+
+        const goToLogin = document.getElementById('go-to-login');
+        if (goToLogin) {
+            goToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showLoginPage();
+            });
+        }
+
+        // Forms
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+        }
+
+        const registerForm = document.getElementById('register-form');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => this.handleRegister(e));
+        }
+
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => this.handleContact(e));
+        }
+
         // Logout
-        document.getElementById('logout-btn').addEventListener('click', () => this.handleLogout());
-        
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.handleLogout());
+        }
+
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => this.handleNavigation(e));
         });
 
         // Quick Actions
-        document.getElementById('share-location-btn').addEventListener('click', () => {
-            document.querySelector('.nav-link[data-page="location"]').click();
-        });
+        const shareLocationBtn = document.getElementById('share-location-btn');
+        if (shareLocationBtn) {
+            shareLocationBtn.addEventListener('click', () => {
+                const navLink = document.querySelector('.nav-link[data-page="location"]');
+                if (navLink) navLink.click();
+            });
+        }
 
-        document.getElementById('emergency-btn').addEventListener('click', () => {
-            document.querySelector('.nav-link[data-page="emergency"]').click();
-        });
+        const emergencyBtn = document.getElementById('emergency-btn');
+        if (emergencyBtn) {
+            emergencyBtn.addEventListener('click', () => {
+                const navLink = document.querySelector('.nav-link[data-page="emergency"]');
+                if (navLink) navLink.click();
+            });
+        }
 
-        document.getElementById('find-safe-btn').addEventListener('click', () => {
-            this.showMessage('Find Safe Place', 'Scanning for nearby safe locations...');
-        });
+        const findSafeBtn = document.getElementById('find-safe-btn');
+        if (findSafeBtn) {
+            findSafeBtn.addEventListener('click', () => {
+                this.showMessage('Find Safe Place', 'Scanning for nearby safe locations...');
+            });
+        }
 
-        document.getElementById('contact-support-btn').addEventListener('click', () => {
-            document.querySelector('.nav-link[data-page="contact"]').click();
-        });
+        const contactSupportBtn = document.getElementById('contact-support-btn');
+        if (contactSupportBtn) {
+            contactSupportBtn.addEventListener('click', () => {
+                const navLink = document.querySelector('.nav-link[data-page="contact"]');
+                if (navLink) navLink.click();
+            });
+        }
 
         // Location Page
-        document.getElementById('get-location-btn').addEventListener('click', () => this.getLocation());
+        const getLocationBtn = document.getElementById('get-location-btn');
+        if (getLocationBtn) {
+            getLocationBtn.addEventListener('click', () => this.getLocation());
+        }
 
         // Emergency Buttons
         document.querySelectorAll('.emergency-btn').forEach(btn => {
@@ -339,34 +366,74 @@ class UIManager {
         });
 
         // Modal
-        document.querySelector('.modal-close').addEventListener('click', () => this.closeModal());
-        document.getElementById('modal-btn').addEventListener('click', () => this.closeModal());
-        document.getElementById('modal').addEventListener('click', (e) => {
-            if (e.target.id === 'modal') this.closeModal();
-        });
+        const modalClose = document.querySelector('.modal-close');
+        if (modalClose) {
+            modalClose.addEventListener('click', () => this.closeModal());
+        }
+
+        const modalBtn = document.getElementById('modal-btn');
+        if (modalBtn) {
+            modalBtn.addEventListener('click', () => this.closeModal());
+        }
+
+        const modal = document.getElementById('modal');
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target.id === 'modal') this.closeModal();
+            });
+        }
 
         // Dark Mode
-        document.getElementById('theme-toggle').addEventListener('click', () => this.toggleDarkMode());
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => this.toggleDarkMode());
+        }
 
         // SOS Button
-        document.getElementById('sos-button').addEventListener('click', () => this.handleSOS());
+        const sosButton = document.getElementById('sos-button');
+        if (sosButton) {
+            sosButton.addEventListener('click', () => this.handleSOS());
+        }
 
         // Friends
-        document.getElementById('add-friend-btn').addEventListener('click', () => this.addFriend());
-        document.getElementById('share-location-toggle').addEventListener('change', (e) => this.toggleLocationSharing(e));
+        const addFriendBtn = document.getElementById('add-friend-btn');
+        if (addFriendBtn) {
+            addFriendBtn.addEventListener('click', () => this.addFriend());
+        }
+
+        const shareLocationToggle = document.getElementById('share-location-toggle');
+        if (shareLocationToggle) {
+            shareLocationToggle.addEventListener('change', (e) => this.toggleLocationSharing(e));
+        }
 
         // Incident Report
-        document.getElementById('incident-form').addEventListener('submit', (e) => this.handleIncidentReport(e));
+        const incidentForm = document.getElementById('incident-form');
+        if (incidentForm) {
+            incidentForm.addEventListener('submit', (e) => this.handleIncidentReport(e));
+        }
 
         // Documents
-        document.getElementById('add-doc-btn').addEventListener('click', () => this.addDocument());
+        const addDocBtn = document.getElementById('add-doc-btn');
+        if (addDocBtn) {
+            addDocBtn.addEventListener('click', () => this.addDocument());
+        }
 
         // Profile
-        document.getElementById('add-emergency-btn').addEventListener('click', () => this.addEmergencyContact());
+        const addEmergencyBtn = document.getElementById('add-emergency-btn');
+        if (addEmergencyBtn) {
+            addEmergencyBtn.addEventListener('click', () => this.addEmergencyContact());
+        }
 
         // Draw Safety Map
-        this.drawSafetyMap();
-        this.loadChecklist();
+        const safetyCanvas = document.getElementById('safety-canvas');
+        if (safetyCanvas) {
+            this.drawSafetyMap();
+        }
+
+        const beforeChecklist = document.getElementById('before-checklist');
+        if (beforeChecklist) {
+            this.loadChecklist();
+        }
     }
 
     toggleDarkMode() {
@@ -405,7 +472,15 @@ class UIManager {
         this.locationManager.useDemoLocation(user);
         this.locationManager.startTracking();
         
-        this.showSection('home');
+        // Check if there's a hash in the URL to show a specific section
+        const hash = window.location.hash.substring(1);
+        const validSections = ['home', 'location', 'emergency', 'sos', 'friends', 'safety-map', 'checklist', 'incidents', 'documents', 'profile', 'contact'];
+        
+        if (hash && validSections.includes(hash)) {
+            this.showSection(hash);
+        } else {
+            this.showSection('home');
+        }
     }
 
     showSection(sectionName) {
@@ -426,11 +501,6 @@ class UIManager {
             setTimeout(() => this.initLocationPage(), 100);
         } else if (sectionName === 'safety-map') {
             setTimeout(() => this.drawSafetyMap(), 100);
-        } else if (sectionName === 'contact') {
-            setTimeout(() => {
-                // Load tickets in support status tab
-                this.loadTickets();
-            }, 100);
         }
     }
 
@@ -500,12 +570,25 @@ class UIManager {
     }
 
     // Form Handlers
-    handleLogin(e) {
+    async handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value.trim();
         const password = document.getElementById('login-password').value;
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Signing in...';
+
+        // Simulate network latency
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
         const result = this.userManager.login(email, password);
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
         if (result.success) {
             this.showDashboard();
         } else {
@@ -513,14 +596,21 @@ class UIManager {
         }
     }
 
-    handleRegister(e) {
+    async handleRegister(e) {
         e.preventDefault();
-        const form = document.getElementById('register-form');
         const name = document.getElementById('register-name').value.trim();
         const email = document.getElementById('register-email').value.trim();
         const phone = document.getElementById('register-phone').value.trim();
         const password = document.getElementById('register-password').value;
         const confirm = document.getElementById('register-confirm').value;
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        // Optional fields from register.html
+        const age = document.getElementById('age')?.value;
+        const location = document.getElementById('location')?.value;
+        const gender = document.getElementById('gender')?.value;
+        const emergency = document.getElementById('emergency')?.value;
 
         // Validation
         if (!this.validateEmail(email)) {
@@ -543,167 +633,53 @@ class UIManager {
             return;
         }
 
-        const user = { name, email, phone, password };
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating account...';
+
+        // Simulate network latency
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const user = { name, email, phone, password, age, location, gender, emergency };
         const result = this.userManager.register(user);
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
 
         if (result.success) {
             this.showMessage('Success', result.message + ' You can now login.');
-            setTimeout(() => this.showLoginPage(), 2000);
+            setTimeout(() => {
+                if (document.getElementById('login-page')) {
+                    this.showLoginPage();
+                } else {
+                    window.location.href = 'index.html';
+                }
+            }, 2000);
         } else {
             this.showMessage('Registration Failed', result.message);
         }
     }
 
-    handleContact(e) {
+    async handleContact(e) {
         e.preventDefault();
         const subject = document.getElementById('contact-subject').value.trim();
-        const priority = document.getElementById('contact-priority').value;
         const message = document.getElementById('contact-message').value.trim();
-        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
         if (subject && message) {
-            // Create ticket
-            const ticket = {
-                id: 'TKT-' + Date.now(),
-                subject: subject,
-                priority: priority,
-                message: message,
-                status: 'open',
-                timestamp: new Date().toLocaleString(),
-                user: this.userManager.getCurrentUser().email
-            };
-            
-            // Save ticket
-            this.saveTicket(ticket);
-            
-            // Show success
-            const successMsg = document.getElementById('contact-success-msg');
-            if (successMsg) {
-                successMsg.style.display = 'block';
-                setTimeout(() => {
-                    successMsg.style.display = 'none';
-                }, 5000);
-            }
-            
-            this.showMessage('Ticket #' + ticket.id, 'Your support ticket has been created. Expected response time: ' + 
-                (priority === 'critical' ? '15 minutes' : priority === 'urgent' ? '1 hour' : '24 hours'));
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Simulate network latency
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            this.showMessage('Message Sent', 'Your message has been sent successfully. We will get back to you soon.');
             document.getElementById('contact-form').reset();
-            
-            // Load tickets list
-            this.loadTickets();
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
-    }
-
-    saveTicket(ticket) {
-        let tickets = this.getTickets();
-        tickets.push(ticket);
-        localStorage.setItem('support-tickets', JSON.stringify(tickets));
-    }
-
-    getTickets() {
-        const tickets = localStorage.getItem('support-tickets');
-        return tickets ? JSON.parse(tickets) : [];
-    }
-
-    loadTickets() {
-        const currentUser = this.userManager.getCurrentUser();
-        const allTickets = this.getTickets();
-        const userTickets = allTickets.filter(t => t.user === currentUser.email);
-        
-        const ticketsList = document.getElementById('tickets-list');
-        if (!ticketsList) return;
-        
-        if (userTickets.length === 0) {
-            ticketsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No support tickets yet</p>';
-            return;
-        }
-        
-        let html = '';
-        userTickets.reverse().forEach(ticket => {
-            const statusBadge = ticket.status === 'open' ? 'open' : 'closed';
-            html += `
-                <div class="ticket-item">
-                    <h5>${ticket.subject}</h5>
-                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">${ticket.message.substring(0, 100)}...</p>
-                    <div class="ticket-meta">
-                        <span><strong>ID:</strong> ${ticket.id}</span>
-                        <span><strong>Priority:</strong> ${ticket.priority}</span>
-                        <span class="ticket-status ${statusBadge}">${ticket.status.toUpperCase()}</span>
-                        <span><strong>Date:</strong> ${ticket.timestamp}</span>
-                    </div>
-                </div>
-            `;
-        });
-        
-        ticketsList.innerHTML = html;
-    }
-
-    handleTabSwitch(e) {
-        const tabName = e.target.dataset.tab;
-        
-        // Hide all tabs
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        
-        // Remove active class from all buttons
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        // Show selected tab
-        const tabElement = document.getElementById(tabName);
-        if (tabElement) {
-            tabElement.classList.add('active');
-            e.target.classList.add('active');
-            
-            // Load tickets when support-status-tab is opened
-            if (tabName === 'support-status-tab') {
-                this.loadTickets();
-            }
-        }
-    }
-
-    handleChatMessage() {
-        const chatInput = document.getElementById('chat-input');
-        const chatBox = document.getElementById('chat-box');
-        
-        if (!chatInput || !chatBox) return;
-        
-        const message = chatInput.value.trim();
-        if (!message) return;
-        
-        // Add user message
-        const userMessageDiv = document.createElement('div');
-        userMessageDiv.className = 'chat-message user-message';
-        const now = new Date();
-        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        userMessageDiv.innerHTML = `<p>${message}</p><small>${timeStr}</small>`;
-        chatBox.appendChild(userMessageDiv);
-        
-        // Clear input
-        chatInput.value = '';
-        
-        // Auto-scroll to bottom
-        chatBox.scrollTop = chatBox.scrollHeight;
-        
-        // Simulate bot response after delay
-        setTimeout(() => {
-            const botMessageDiv = document.createElement('div');
-            botMessageDiv.className = 'chat-message bot-message';
-            const responses = [
-                'Thank you for your message! Our support team will review it shortly.',
-                'I understand. Can you provide more details about the issue?',
-                'Your concern is important to us. Please describe what happened.',
-                'How can I best assist you today?',
-                'Thanks for reaching out. One of our agents will be with you soon.'
-            ];
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            const botTime = new Date();
-            const botTimeStr = botTime.getHours().toString().padStart(2, '0') + ':' + botTime.getMinutes().toString().padStart(2, '0');
-            botMessageDiv.innerHTML = `<p>${randomResponse}</p><small>${botTimeStr}</small>`;
-            chatBox.appendChild(botMessageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 500);
     }
 
     handleLogout() {
@@ -810,8 +786,16 @@ class UIManager {
     }
 
     // Emergency Handler
-    handleEmergency(e) {
+    async handleEmergency(e) {
         const emergencyType = e.currentTarget.dataset.type;
+        const btn = e.currentTarget;
+        const originalHtml = btn.innerHTML;
+
+        // Show loading state on the button
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        btn.innerHTML = '<span>⏳</span><span>Sending Alert...</span>';
+
         const emergencyTypes = {
             'medical': 'Medical Emergency',
             'theft': 'Theft/Crime',
@@ -820,9 +804,27 @@ class UIManager {
         };
 
         const title = emergencyTypes[emergencyType];
+        
+        // Simulate network latency for the emergency alert
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
         const message = `${title} alert has been sent!\n\nAuthorities have been notified with your current location.`;
         
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.innerHTML = originalHtml;
+
         this.showMessage('Emergency Alert Sent', message);
+
+        // Also trigger the SOS logic for real-life notification simulation
+        const user = this.userManager.getCurrentUser();
+        let locationStr = 'Location unavailable';
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                locationStr = `Lat: ${pos.coords.latitude.toFixed(4)}, Lng: ${pos.coords.longitude.toFixed(4)}`;
+                this.simulateEmergencyAlert(user, `EMERGENCY: ${title} at ${locationStr}`, 0);
+            });
+        }
     }
 
     // Utilities
@@ -837,9 +839,17 @@ class UIManager {
     }
 
     showMessage(title, message) {
-        document.getElementById('modal-title').textContent = title;
-        document.getElementById('modal-message').textContent = message;
-        document.getElementById('modal').classList.add('show');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modal = document.getElementById('modal');
+
+        if (modalTitle && modalMessage && modal) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.classList.add('show');
+        } else {
+            alert(`${title}: ${message}`);
+        }
     }
 
     closeModal() {
@@ -847,21 +857,84 @@ class UIManager {
     }
 
     // SOS Handler
-    handleSOS() {
-        const location = navigator.geolocation ? 'Getting location...' : 'Location unavailable';
+    async handleSOS() {
         const user = this.userManager.getCurrentUser();
         const friends = this.friendsManager.getFriends();
         
-        this.showMessage('SOS Alert Sent', `Emergency alert sent!\nContacts notified: ${friends.length}\nLocation: ${location}`);
-        
         const statusDiv = document.getElementById('sos-status');
-        statusDiv.textContent = 'Alert sent to ' + friends.length + ' contacts at ' + new Date().toLocaleTimeString();
+        statusDiv.textContent = 'Activating SOS... Getting location and recording audio...';
         statusDiv.classList.add('active');
+        statusDiv.style.background = 'var(--danger-color)';
+
+        // 1. Get Location
+        let locationStr = 'Location unavailable';
+        if (navigator.geolocation) {
+            try {
+                const pos = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                locationStr = `Lat: ${pos.coords.latitude.toFixed(4)}, Lng: ${pos.coords.longitude.toFixed(4)}`;
+            } catch (err) {
+                console.log("Location error", err);
+            }
+        }
+
+        // 2. Start Audio Recording
+        let audioBlob = null;
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            const audioChunks = [];
+
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                console.log("Audio recording stopped", audioBlob);
+                // In a real app, you'd upload this blob to a server
+            };
+
+            mediaRecorder.start();
+            statusDiv.textContent = 'SOS ACTIVE: Recording audio and sending alerts...';
+            
+            // Stop recording after 10 seconds
+            setTimeout(() => {
+                mediaRecorder.stop();
+                stream.getTracks().forEach(track => track.stop());
+            }, 10000);
+        } catch (err) {
+            console.log("Audio recording error", err);
+            statusDiv.textContent = 'SOS ACTIVE: Alerts sent (Audio failed: ' + err.message + ')';
+        }
+
+        // 3. Send "Alerts" (Simulated API call)
+        this.simulateEmergencyAlert(user, locationStr, friends.length);
+
+        this.showMessage('SOS ALERT ACTIVATED', `Emergency alert sent!\nContacts notified: ${friends.length}\nLocation: ${locationStr}\nAudio recording started (10s).`);
         
         setTimeout(() => {
             statusDiv.classList.remove('active');
             statusDiv.textContent = '';
-        }, 5000);
+        }, 15000);
+    }
+
+    async simulateEmergencyAlert(user, location, contactCount) {
+        console.log(`[REAL-LIFE] Sending emergency alert for ${user.email}`);
+        console.log(`[REAL-LIFE] Location: ${location}`);
+        console.log(`[REAL-LIFE] Notifying ${contactCount} emergency contacts`);
+        
+        // Simulate network latency
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Show browser notification if permitted
+        if ("Notification" in window && Notification.permission === "granted") {
+            new Notification("SOS ALERT SENT", {
+                body: `Emergency alert for ${user.name} at ${location}`,
+                icon: 'https://cdn-icons-png.flaticon.com/512/595/595067.png'
+            });
+        }
     }
 
     // Friends Management
@@ -1035,174 +1108,80 @@ class UIManager {
         this.loadEmergencyContacts();
     }
 
-    // Safety Map with Real User Locations
+    // Safety Map with Leaflet
     drawSafetyMap() {
-        const canvas = document.getElementById('safety-canvas');
-        if (!canvas) {
-            console.log("[v0] Canvas not found, retrying in 300ms...");
+        const container = document.getElementById('safety-map-container');
+        if (!container) {
             setTimeout(() => this.drawSafetyMap(), 300);
             return;
         }
-        
-        try {
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.log("[v0] Canvas context failed");
-                return;
-            }
-            
-            const width = canvas.width || 800;
-            const height = canvas.height || 400;
-            
-            // Clear canvas with light background
-            ctx.fillStyle = '#e0f2fe';
-            ctx.fillRect(0, 0, width, height);
-            
-            // Draw map title and info
-            ctx.fillStyle = '#0c4a6e';
-            ctx.font = 'bold 14px Arial';
-            ctx.textAlign = 'left';
-            ctx.fillText('Live Location Map - India', 10, 20);
-            
-            // Draw grid
-            ctx.strokeStyle = '#bae6fd';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < width; i += 100) {
-                ctx.beginPath();
-                ctx.moveTo(i, 0);
-                ctx.lineTo(i, height);
-                ctx.stroke();
-            }
-            for (let i = 0; i < height; i += 100) {
-                ctx.beginPath();
-                ctx.moveTo(0, i);
-                ctx.lineTo(width, i);
-                ctx.stroke();
-            }
-            
-            // Draw region labels
-            ctx.fillStyle = '#64748b';
-            ctx.font = '10px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('North', width/4, 30);
-            ctx.fillText('South', width/4, height - 10);
-            ctx.fillText('East', width - 30, height/2);
-            ctx.fillText('West', 20, height/2);
-            
-            // Get all user locations
-            const allLocations = this.locationManager.getAllLocations();
-            const currentUser = this.userManager.getCurrentUser();
-            
-            if (allLocations.length === 0) {
-                this.locationManager.useDemoLocation(currentUser);
-                // Retry after storing location
-                setTimeout(() => this.drawSafetyMap(), 500);
-                return;
-            }
-            
-            // Draw all user locations
-            allLocations.forEach((location, index) => {
-                const coords = this.locationManager.latLngToCanvasCoords(
-                    location.lat, 
-                    location.lng, 
-                    width, 
-                    height
-                );
-                
-                const isCurrentUser = location.email === currentUser.email;
-                
-                // Draw location marker circle
-                if (isCurrentUser) {
-                    ctx.fillStyle = '#3b82f6';
-                    ctx.strokeStyle = '#1e40af';
-                    ctx.lineWidth = 3;
-                    const radius = 14;
-                    ctx.beginPath();
-                    ctx.arc(coords.x, coords.y, radius, 0, 2 * Math.PI);
-                    ctx.fill();
-                    ctx.stroke();
-                    
-                    // Draw pulsing effect
-                    ctx.strokeStyle = 'rgba(59, 130, 246, 0.3)';
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.arc(coords.x, coords.y, radius + 8, 0, 2 * Math.PI);
-                    ctx.stroke();
-                } else {
-                    // Friends in different colors
-                    const colors = ['#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
-                    ctx.fillStyle = colors[index % colors.length];
-                    ctx.strokeStyle = 'white';
-                    ctx.lineWidth = 2;
-                    const radius = 10;
-                    ctx.beginPath();
-                    ctx.arc(coords.x, coords.y, radius, 0, 2 * Math.PI);
-                    ctx.fill();
-                    ctx.stroke();
-                }
-                
-                // Draw user label
-                ctx.fillStyle = isCurrentUser ? 'white' : 'white';
-                ctx.font = isCurrentUser ? 'bold 11px Arial' : '10px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(isCurrentUser ? 'YOU' : location.name.split(' ')[0], coords.x, coords.y);
-                
-                // Draw info below marker
-                ctx.fillStyle = '#475569';
-                ctx.font = '9px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(location.timestamp, coords.x, coords.y + 20);
-            });
-            
-            // Draw legend
-            this.drawMapLegend(ctx, width, height);
-            
-            console.log("[v0] Safety map rendered with " + allLocations.length + " locations");
-        } catch (error) {
-            console.log("[v0] Error drawing map: " + error.message);
+
+        const currentUserLoc = this.locationManager.getCurrentUserLocation();
+        const lat = currentUserLoc ? currentUserLoc.lat : 20.5937;
+        const lng = currentUserLoc ? currentUserLoc.lng : 78.9629;
+
+        // Initialize map if not already done
+        if (!this.map) {
+            this.map = L.map('safety-map-container').setView([lat, lng], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(this.map);
+            this.markers = {};
+        } else {
+            this.map.setView([lat, lng]);
         }
+
+        // Clear existing markers
+        for (let id in this.markers) {
+            this.map.removeLayer(this.markers[id]);
+        }
+        this.markers = {};
+
+        // Add markers for all user locations
+        const allLocations = this.locationManager.getAllLocations();
+        const currentUser = this.userManager.getCurrentUser();
+
+        allLocations.forEach(loc => {
+            const isCurrentUser = loc.email === currentUser.email;
+            const markerColor = isCurrentUser ? 'blue' : 'green';
+            
+            // Custom icon for current user
+            const icon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background-color: ${markerColor}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>`,
+                iconSize: [15, 15],
+                iconAnchor: [7, 7]
+            });
+
+            const marker = L.marker([loc.lat, loc.lng], { icon: icon })
+                .addTo(this.map)
+                .bindPopup(`<b>${isCurrentUser ? 'You' : loc.name}</b><br>Last seen: ${loc.timestamp}`);
+            
+            this.markers[loc.email] = marker;
+        });
+
+        // Add some simulated "Safety Rating" zones
+        const safetyZones = [
+            { lat: 28.6139, lng: 77.2090, status: 'safe', name: 'Delhi Safe Zone' },
+            { lat: 19.0760, lng: 72.8777, status: 'caution', name: 'Mumbai Caution Area' },
+            { lat: 13.0827, lng: 80.2707, status: 'unsafe', name: 'Chennai Unsafe Area' }
+        ];
+
+        safetyZones.forEach(zone => {
+            const color = zone.status === 'safe' ? '#16a34a' : (zone.status === 'caution' ? '#f97316' : '#dc2626');
+            L.circle([zone.lat, zone.lng], {
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.2,
+                radius: 50000 // 50km
+            }).addTo(this.map).bindPopup(`<b>${zone.name}</b><br>Status: ${zone.status.toUpperCase()}`);
+        });
+
+        console.log("[v0] Leaflet map rendered with " + allLocations.length + " locations");
     }
 
     drawMapLegend(ctx, width, height) {
-        const legendX = width - 180;
-        const legendY = height - 120;
-        
-        // Legend background
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-        ctx.fillRect(legendX, legendY, 170, 110);
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(legendX, legendY, 170, 110);
-        
-        // Legend title
-        ctx.fillStyle = '#1e293b';
-        ctx.font = 'bold 11px Arial';
-        ctx.textAlign = 'left';
-        ctx.fillText('Legend', legendX + 10, legendY + 18);
-        
-        // Your location
-        ctx.fillStyle = '#3b82f6';
-        ctx.beginPath();
-        ctx.arc(legendX + 20, legendY + 35, 5, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = '#475569';
-        ctx.font = '9px Arial';
-        ctx.textAlign = 'left';
-        ctx.fillText('Your Location', legendX + 35, legendY + 38);
-        
-        // Friends
-        ctx.fillStyle = '#10b981';
-        ctx.beginPath();
-        ctx.arc(legendX + 20, legendY + 52, 5, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = '#475569';
-        ctx.fillText('Friends Nearby', legendX + 35, legendY + 55);
-        
-        // Updates
-        ctx.fillStyle = '#475569';
-        ctx.font = '8px Arial';
-        ctx.fillText('Updates: Every 5 sec', legendX + 10, legendY + 100);
+        // Legend is now handled by Leaflet or CSS
     }
 
     drawLabel(ctx, text, x, y) {
@@ -1259,6 +1238,29 @@ class UIManager {
                 <span>${item}</span>
             </label>
         `).join('');
+    }
+}
+
+// Standalone Page Handlers
+async function handleStandaloneContact(event) {
+    event.preventDefault();
+    const subject = document.getElementById('contact-subject').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    if (subject && message) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        // Simulate network latency
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        alert('Message Sent: Your message has been sent successfully. We will get back to you soon.');
+        document.getElementById('contact-form').reset();
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
     }
 }
 
