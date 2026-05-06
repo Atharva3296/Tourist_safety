@@ -286,10 +286,28 @@ class UIManager {
         document.getElementById('login-form').addEventListener('submit', (e) => this.handleLogin(e));
         document.getElementById('register-form').addEventListener('submit', (e) => this.handleRegister(e));
         document.getElementById('contact-form').addEventListener('submit', (e) => this.handleContact(e));
-
+        
+        // Support tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleTabSwitch(e));
+        });
+        
+        // Live chat
+        const sendChatBtn = document.getElementById('send-chat-btn');
+        if (sendChatBtn) {
+            sendChatBtn.addEventListener('click', () => this.handleChatMessage());
+        }
+        
+        const chatInput = document.getElementById('chat-input');
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.handleChatMessage();
+            });
+        }
+        
         // Logout
         document.getElementById('logout-btn').addEventListener('click', () => this.handleLogout());
-
+        
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => this.handleNavigation(e));
@@ -408,6 +426,11 @@ class UIManager {
             setTimeout(() => this.initLocationPage(), 100);
         } else if (sectionName === 'safety-map') {
             setTimeout(() => this.drawSafetyMap(), 100);
+        } else if (sectionName === 'contact') {
+            setTimeout(() => {
+                // Load tickets in support status tab
+                this.loadTickets();
+            }, 100);
         }
     }
 
@@ -534,12 +557,153 @@ class UIManager {
     handleContact(e) {
         e.preventDefault();
         const subject = document.getElementById('contact-subject').value.trim();
+        const priority = document.getElementById('contact-priority').value;
         const message = document.getElementById('contact-message').value.trim();
-
+        
         if (subject && message) {
-            this.showMessage('Message Sent', 'Your message has been sent successfully. We will get back to you soon.');
+            // Create ticket
+            const ticket = {
+                id: 'TKT-' + Date.now(),
+                subject: subject,
+                priority: priority,
+                message: message,
+                status: 'open',
+                timestamp: new Date().toLocaleString(),
+                user: this.userManager.getCurrentUser().email
+            };
+            
+            // Save ticket
+            this.saveTicket(ticket);
+            
+            // Show success
+            const successMsg = document.getElementById('contact-success-msg');
+            if (successMsg) {
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            }
+            
+            this.showMessage('Ticket #' + ticket.id, 'Your support ticket has been created. Expected response time: ' + 
+                (priority === 'critical' ? '15 minutes' : priority === 'urgent' ? '1 hour' : '24 hours'));
             document.getElementById('contact-form').reset();
+            
+            // Load tickets list
+            this.loadTickets();
         }
+    }
+
+    saveTicket(ticket) {
+        let tickets = this.getTickets();
+        tickets.push(ticket);
+        localStorage.setItem('support-tickets', JSON.stringify(tickets));
+    }
+
+    getTickets() {
+        const tickets = localStorage.getItem('support-tickets');
+        return tickets ? JSON.parse(tickets) : [];
+    }
+
+    loadTickets() {
+        const currentUser = this.userManager.getCurrentUser();
+        const allTickets = this.getTickets();
+        const userTickets = allTickets.filter(t => t.user === currentUser.email);
+        
+        const ticketsList = document.getElementById('tickets-list');
+        if (!ticketsList) return;
+        
+        if (userTickets.length === 0) {
+            ticketsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No support tickets yet</p>';
+            return;
+        }
+        
+        let html = '';
+        userTickets.reverse().forEach(ticket => {
+            const statusBadge = ticket.status === 'open' ? 'open' : 'closed';
+            html += `
+                <div class="ticket-item">
+                    <h5>${ticket.subject}</h5>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">${ticket.message.substring(0, 100)}...</p>
+                    <div class="ticket-meta">
+                        <span><strong>ID:</strong> ${ticket.id}</span>
+                        <span><strong>Priority:</strong> ${ticket.priority}</span>
+                        <span class="ticket-status ${statusBadge}">${ticket.status.toUpperCase()}</span>
+                        <span><strong>Date:</strong> ${ticket.timestamp}</span>
+                    </div>
+                </div>
+            `;
+        });
+        
+        ticketsList.innerHTML = html;
+    }
+
+    handleTabSwitch(e) {
+        const tabName = e.target.dataset.tab;
+        
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show selected tab
+        const tabElement = document.getElementById(tabName);
+        if (tabElement) {
+            tabElement.classList.add('active');
+            e.target.classList.add('active');
+            
+            // Load tickets when support-status-tab is opened
+            if (tabName === 'support-status-tab') {
+                this.loadTickets();
+            }
+        }
+    }
+
+    handleChatMessage() {
+        const chatInput = document.getElementById('chat-input');
+        const chatBox = document.getElementById('chat-box');
+        
+        if (!chatInput || !chatBox) return;
+        
+        const message = chatInput.value.trim();
+        if (!message) return;
+        
+        // Add user message
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'chat-message user-message';
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        userMessageDiv.innerHTML = `<p>${message}</p><small>${timeStr}</small>`;
+        chatBox.appendChild(userMessageDiv);
+        
+        // Clear input
+        chatInput.value = '';
+        
+        // Auto-scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
+        
+        // Simulate bot response after delay
+        setTimeout(() => {
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.className = 'chat-message bot-message';
+            const responses = [
+                'Thank you for your message! Our support team will review it shortly.',
+                'I understand. Can you provide more details about the issue?',
+                'Your concern is important to us. Please describe what happened.',
+                'How can I best assist you today?',
+                'Thanks for reaching out. One of our agents will be with you soon.'
+            ];
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            const botTime = new Date();
+            const botTimeStr = botTime.getHours().toString().padStart(2, '0') + ':' + botTime.getMinutes().toString().padStart(2, '0');
+            botMessageDiv.innerHTML = `<p>${randomResponse}</p><small>${botTimeStr}</small>`;
+            chatBox.appendChild(botMessageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 500);
     }
 
     handleLogout() {
