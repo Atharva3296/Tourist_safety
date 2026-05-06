@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Login Page -->
     <div id="login-page" class="page active">
         <div class="auth-container">
             <div class="auth-card">
@@ -34,6 +35,7 @@
         </div>
     </div>
 
+    <!-- Register Page -->
     <div id="register-page" class="page">
         <div class="auth-container">
             <div class="auth-card">
@@ -76,7 +78,9 @@
         </div>
     </div>
 
+    <!-- Dashboard Page -->
     <div id="dashboard-page" class="page">
+        <!-- Navigation Header -->
         <header class="navbar">
             <div class="navbar-container">
                 <div class="navbar-brand">
@@ -100,7 +104,9 @@
             </div>
         </header>
 
+        <!-- Main Content -->
         <main class="dashboard-main">
+            <!-- Home Page -->
             <section id="home-page" class="dashboard-section active">
                 <div class="hero-section">
                     <h1>Welcome to Tourist Safety Monitoring System</h1>
@@ -153,6 +159,7 @@
                 </div>
             </section>
 
+            <!-- Location Page -->
             <section id="location-page" class="dashboard-section">
                 <h1>Real-Time Location Tracking</h1>
                 <div class="location-content">
@@ -184,6 +191,7 @@
                 </div>
             </section>
 
+            <!-- Emergency Page -->
             <section id="emergency-page" class="dashboard-section">
                 <h1>Emergency Alert System</h1>
                 <div class="emergency-content">
@@ -234,6 +242,7 @@
                 </div>
             </section>
 
+            <!-- SOS Panic Button -->
             <section id="sos-page" class="dashboard-section">
                 <h1>Emergency SOS Alert</h1>
                 <div class="sos-container">
@@ -254,6 +263,7 @@
                 </div>
             </section>
 
+            <!-- Friends Location Tracking -->
             <section id="friends-page" class="dashboard-section">
                 <h1>Friends Location Tracking</h1>
                 <div class="friends-container">
@@ -281,6 +291,7 @@
                 </div>
             </section>
 
+            <!-- Community Safety Map -->
             <section id="safety-map-page" class="dashboard-section">
                 <h1>Community Safety Map</h1>
                 <div class="map-container">
@@ -308,6 +319,7 @@
                 </div>
             </section>
 
+            <!-- Travel Checklist -->
             <section id="checklist-page" class="dashboard-section">
                 <h1>Travel Safety Checklist</h1>
                 <div class="checklist-container">
@@ -326,6 +338,7 @@
                 </div>
             </section>
 
+            <!-- Incident Reporting -->
             <section id="incidents-page" class="dashboard-section">
                 <h1>Report Incident</h1>
                 <div class="incident-container">
@@ -360,6 +373,7 @@
                 </div>
             </section>
 
+            <!-- Document Vault -->
             <section id="documents-page" class="dashboard-section">
                 <h1>Secure Document Vault</h1>
                 <div class="documents-container">
@@ -378,7 +392,7 @@
                         </div>
                         <div class="form-group">
                             <label for="doc-content">Document Details</label>
-                            <textarea id="doc-content" placeholder="Enter document details (encrypted)..." rows="3"></textarea>.
+                            <textarea id="doc-content" placeholder="Enter document details (encrypted)..." rows="3"></textarea>
                         </div>
                         <button class="btn btn-primary" id="add-doc-btn">Save Document</button>
                     </div>
@@ -389,6 +403,7 @@
                 </div>
             </section>
 
+            <!-- User Profile -->
             <section id="profile-page" class="dashboard-section">
                 <h1>My Profile</h1>
                 <div class="profile-container">
@@ -422,38 +437,182 @@
                 </div>
             </section>
 
+            <!-- Contact Page -->
             <section id="contact-page" class="dashboard-section">
-                <h1>Contact & Support</h1>
-                <div class="contact-content">
-                    <div class="contact-card">
-                        <h3>Get in Touch</h3>
-                        <form id="contact-form" class="contact-form">
-                            <div class="form-group">
-                                <label for="contact-subject">Subject</label>
-                                <input type="text" id="contact-subject" name="subject" placeholder="What is this about?" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-message">Message</label>
-                                <textarea id="contact-message" name="message" placeholder="Describe your concern..." rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
-                        </form>
+                <h1>Contact & Support Center</h1>
+                <div class="contact-main">
+                    <!-- Support Tabs -->
+                    <div class="support-tabs">
+                        <button class="tab-btn active" data-tab="contact-form-tab">Send Message</button>
+                        <button class="tab-btn" data-tab="live-chat-tab">Live Chat</button>
+                        <button class="tab-btn" data-tab="faq-tab">FAQ</button>
+                        <button class="tab-btn" data-tab="support-status-tab">Support Status</button>
                     </div>
 
-                    <div class="contact-card">
-                        <h3>Contact Information</h3>
-                        <div class="contact-info">
-                            <p><strong>Email:</strong> support@touristsafety.com</p>
-                            <p><strong>Phone:</strong> +91-XXXX-XXXX-XXXX</p>
-                            <p><strong>Address:</strong> Tourist Safety Center, City</p>
-                            <p><strong>Hours:</strong> 24/7 Available</p>
+                    <!-- Contact Form Tab -->
+                    <div id="contact-form-tab" class="tab-content active">
+                        <div class="contact-content">
+                            <div class="contact-card full-width">
+                                <h3>Send us a Message</h3>
+                                <form id="contact-form" class="contact-form">
+                                    <div class="form-group">
+                                        <label for="contact-subject">Subject</label>
+                                        <select id="contact-subject" name="subject" required>
+                                            <option value="">Select Subject...</option>
+                                            <option value="safety-concern">Safety Concern</option>
+                                            <option value="incident-report">Incident Report</option>
+                                            <option value="technical-issue">Technical Issue</option>
+                                            <option value="suggestion">Feature Suggestion</option>
+                                            <option value="emergency-help">Emergency Help</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-priority">Priority</label>
+                                        <select id="contact-priority" name="priority" required>
+                                            <option value="normal">Normal</option>
+                                            <option value="urgent">Urgent</option>
+                                            <option value="critical">Critical</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-message">Message</label>
+                                        <textarea id="contact-message" name="message" placeholder="Describe your concern in detail..." rows="5" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-attachment">Attach File (Optional)</label>
+                                        <input type="file" id="contact-attachment" name="attachment" accept="image/*,.pdf,.doc,.docx">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                                </form>
+                                <div id="contact-success-msg" class="success-msg" style="display: none;">
+                                    <p>✓ Your message has been sent successfully! Our team will respond within 24 hours.</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-card">
+                                <h3>Contact Information</h3>
+                                <div class="contact-info">
+                                    <div class="info-item">
+                                        <strong>📧 Email Support:</strong>
+                                        <a href="mailto:support@touristsafety.com">support@touristsafety.com</a>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>📞 Phone Support:</strong>
+                                        <a href="tel:+911234567890">+91-123-456-7890</a>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>🆘 Emergency Hotline:</strong>
+                                        <a href="tel:1363">1363 (Toll Free)</a>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>📍 Address:</strong>
+                                        <p>Tourist Safety Center, Main Road, City</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>⏰ Available Hours:</strong>
+                                        <p>24/7 - Monday to Sunday</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-card">
+                                <h3>Response Time</h3>
+                                <div class="response-times">
+                                    <div class="time-item">
+                                        <span class="badge critical">Critical:</span>
+                                        <span>15 minutes</span>
+                                    </div>
+                                    <div class="time-item">
+                                        <span class="badge urgent">Urgent:</span>
+                                        <span>1 hour</span>
+                                    </div>
+                                    <div class="time-item">
+                                        <span class="badge normal">Normal:</span>
+                                        <span>24 hours</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="contact-card">
-                        <h3>Our Team</h3>
-                        <div class="team-info">
-                            <p>Our dedicated team is always ready to help tourists ensure their safety and make their travel experience memorable.</p>
+                    <!-- Live Chat Tab -->
+                    <div id="live-chat-tab" class="tab-content">
+                        <div class="live-chat-container">
+                            <div class="chat-box" id="chat-box">
+                                <div class="chat-message bot-message">
+                                    <p>Hello! Welcome to Tourist Safety Support. How can I help you today?</p>
+                                    <small>2:30 PM</small>
+                                </div>
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                                <button id="send-chat-btn" class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Tab -->
+                    <div id="faq-tab" class="tab-content">
+                        <div class="faq-container">
+                            <h3>Frequently Asked Questions</h3>
+                            <div class="faq-items">
+                                <div class="faq-item">
+                                    <h4>How do I share my location with friends?</h4>
+                                    <p>Go to the Friends section and add your friends' email addresses. Toggle "Location Sharing" ON to start sharing your real-time location.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>What should I do in case of emergency?</h4>
+                                    <p>Press the SOS button on the SOS page. This will alert all your emergency contacts and authorities with your live location.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>How often is my location updated?</h4>
+                                    <p>Your location is updated every 5 seconds and synced with all your connected friends for real-time tracking.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>Can I delete my account?</h4>
+                                    <p>Yes, you can delete your account by contacting our support team. All your data will be permanently removed within 24 hours.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>Is my personal data safe?</h4>
+                                    <p>Yes, all your data is encrypted and stored securely. We never share your information with third parties.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>How do I report an incident?</h4>
+                                    <p>Go to the Incidents section and fill out the incident report form with details. Our team will review it within 24 hours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Status Tab -->
+                    <div id="support-status-tab" class="tab-content">
+                        <div class="support-status-container">
+                            <h3>Support Team Status</h3>
+                            <div class="status-grid">
+                                <div class="status-card online">
+                                    <h4>🟢 Support Team</h4>
+                                    <p class="status-badge">Online</p>
+                                    <p class="status-info">3 agents available</p>
+                                </div>
+                                <div class="status-card good">
+                                    <h4>⚡ System Status</h4>
+                                    <p class="status-badge">Good</p>
+                                    <p class="status-info">99.9% Uptime</p>
+                                </div>
+                                <div class="status-card good">
+                                    <h4>📊 Average Response</h4>
+                                    <p class="status-badge">Fast</p>
+                                    <p class="status-info">12 minutes</p>
+                                </div>
+                            </div>
+
+                            <div class="your-tickets">
+                                <h3>Your Support Tickets</h3>
+                                <div id="tickets-list" class="tickets-list">
+                                    <p style="text-align: center; color: var(--text-secondary);">No tickets yet</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -461,6 +620,7 @@
         </main>
     </div>
 
+    <!-- Modal for Success/Error Messages -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
