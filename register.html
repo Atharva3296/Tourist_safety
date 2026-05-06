@@ -3,73 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourist Registration</title>
+    <title>Location Monitoring</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="auth-container">
+<body>
 
-<div class="auth-card" style="max-width: 600px;">
-    <div class="auth-header">
-        <h1>Tourist Registration</h1>
-        <p>Please register to access safety services, updates, and emergency support during your travels.</p>
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-brand">
+            <h2>Tourist Safety System</h2>
+        </div>
+        <div class="nav-left">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#location" class="nav-link active">Location</a>
+            <a href="index.html#emergency" class="nav-link">Emergency</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
     </div>
+</nav>
 
-    <form id="register-form" class="auth-form" onsubmit="register(event)">
-        <div class="form-group">
-            <label for="register-name">Full Name:</label>
-            <input type="text" id="register-name" placeholder="Enter your full name" required>
+<main class="dashboard-main content-box">
+    <h1>Location Monitoring</h1>
+    <p>Your location is tracked to ensure your safety during travels. Make sure location services are enabled on your device.</p>
+
+    <section class="location-card">
+        <h2>Your Location</h2>
+        <div id="location-display" class="location-info">
+            <p>Click the button below to share your location</p>
         </div>
+        <button class="btn btn-primary" onclick="shareLocation()">Share My Location</button>
+    </section>
 
-        <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="number" id="age" placeholder="Enter your age" required>
+    <section class="alert-box">
+        <h2>Emergency Assistance</h2>
+        <p>If you are in danger or need immediate help, click below:</p>
+        <button class="alert-btn" onclick="callEmergency()">Call Emergency Services</button>
+    </section>
+
+    <section class="safety-tips">
+        <h2>Safety Tips</h2>
+        <div class="safety-tips">
+            <p>Share your travel plan with friends or family.</p>
+            <p>Avoid isolated areas if traveling alone.</p>
+            <p>Keep your phone charged at all times.</p>
+            <p>Enable real-time location sharing for emergency assistance.</p>
         </div>
-
-        <div class="form-group">
-            <label for="register-phone">Mobile Number:</label>
-            <input type="tel" id="register-phone" placeholder="Enter your mobile number" required>
-        </div>
-
-        <div class="form-group">
-            <label for="register-email">Email:</label>
-            <input type="email" id="register-email" placeholder="Enter your email address" required>
-        </div>
-
-        <div class="form-group">
-            <label for="location">Current Location:</label>
-            <input type="text" id="location" placeholder="Enter your current city/town" required>
-        </div>
-
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <select id="gender">
-                <option value="" disabled selected>Select gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="emergency">Emergency Contact:</label>
-            <input type="text" id="emergency" placeholder="Enter emergency contact number">
-        </div>
-
-        <div class="form-group">
-            <label for="register-password">Password:</label>
-            <input type="password" id="register-password" placeholder="Enter password" required>
-        </div>
-
-        <div class="form-group">
-            <label for="register-confirm">Confirm Password:</label>
-            <input type="password" id="register-confirm" placeholder="Confirm password" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-full">Register</button>
-
-        <p class="auth-footer">Already have an account? <a href="index.html">Sign in</a></p>
-    </form>
-</div>
+    </section>
+</main>
 
 <script src="script.js"></script>
 </body>
