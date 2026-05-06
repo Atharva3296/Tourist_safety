@@ -20,7 +20,7 @@
             <a href="index.html#contact" class="nav-link active">Contact</a>
         </div>
         <div class="nav-right">
-            <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            <button class="btn btn-secondary btn-sm" onclick="app.handleLogout()">Logout</button>
         </div>
     </div>
 </nav>
@@ -39,21 +39,21 @@
         <p><strong>Website:</strong> <a href="https://www.touristsafety.com" target="_blank">www.touristsafety.com</a></p>
     </section>
 
-    <!-- <section class="contact-card">
+    <section class="contact-card">
         <h2>Send Us a Message</h2>
         <p>If you have questions or need non-urgent assistance, fill out the form below:</p>
-        <form id="contact-form" class="contact-form" onsubmit="sendMessage(event)">
+        <form id="contact-form" class="contact-form" onsubmit="handleStandaloneContact(event)">
             <div class="form-group">
                 <label for="contact-subject">Subject</label>
-                <input type="text" id="contact-subject" placeholder="Your Name" required>
+                <input type="text" id="contact-subject" placeholder="What is this about?" required>
             </div>
             <div class="form-group">
                 <label for="contact-message">Message</label>
-                <textarea id="contact-message" placeholder="Type your message here" required></textarea>
+                <textarea id="contact-message" placeholder="Type your message here" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
-    </section> -->
+    </section>
 </main>
 
 <script src="script.js"></script>
