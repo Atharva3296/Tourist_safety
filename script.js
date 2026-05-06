@@ -1264,6 +1264,30 @@ async function handleStandaloneContact(event) {
     }
 }
 
+function shareLocation() {
+    if (app) {
+        app.getLocation();
+    } else {
+        alert("Location tracking system is initializing...");
+    }
+}
+
+function callEmergency() {
+    if (app) {
+        app.handleSOS();
+    } else {
+        alert("Emergency system is initializing...");
+    }
+}
+
+function logout() {
+    if (app) {
+        app.handleLogout();
+    } else {
+        window.location.href = 'index.html';
+    }
+}
+
 // Initialize App
 let app;
 document.addEventListener('DOMContentLoaded', () => {
